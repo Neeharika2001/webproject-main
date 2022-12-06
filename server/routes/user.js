@@ -3,9 +3,9 @@ const User = require('../models/user');
 const router = express.Router();
 
 router
-  .get('/getUser', async (req, res) => {
+  .get('/getAllUsers', async (req, res) => {
     try {
-      const users = await User.getUser();
+      const users = await User.getAllUsers();
       res.send(users);
     } catch(err) {
       res.status(401).send({message: err.message});
