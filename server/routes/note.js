@@ -12,7 +12,7 @@ router
     }
   })
 
-  .get('/read', async (req, res) => {
+  .get('/getNote', async (req, res) => {
     try {
       let note = await Note.getNote(req.body);
       if(note["0"]){
@@ -47,7 +47,7 @@ router
     }
   })
 
-  .put('/edit', async (req, res) => {
+  .put('/editNote', async (req, res) => {
     try {
       let note = await Note.editNote(req.body);
       res.send({...note});
@@ -56,7 +56,7 @@ router
     }
   })
 
-  .delete('/delete', async (req, res) => {
+  .post('/deleteNote', async (req, res) => {
     try {
       Note.deleteNote(req.body);
       res.send({success: "Note Deleted... :("})
