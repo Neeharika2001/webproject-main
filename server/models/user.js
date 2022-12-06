@@ -87,5 +87,13 @@ async function deleteUser(user) {
   await con.query(sql);
   }
 
+  async function getAllUsers() {
+    const sql = `SELECT * FROM users;`;
+    let users = await con.query(sql);
+    return users
+  }
+  getAllUsers();
 
-module.exports = {login, register, editUser, deleteUser, getUser};
+  
+
+module.exports = {login, register, editUser, deleteUser, getAllUsers};
