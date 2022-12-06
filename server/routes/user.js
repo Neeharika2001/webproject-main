@@ -3,9 +3,9 @@ const User = require('../models/user');
 const router = express.Router();
 
 router
-  .get('/', async (req, res) => {
+  .get('/getUser', async (req, res) => {
     try {
-      const users = await User.getAllUsers();
+      const users = await User.getUser();
       res.send(users);
     } catch(err) {
       res.status(401).send({message: err.message});
@@ -30,7 +30,7 @@ router
     }
   })
 
-  .put('/edit', async (req, res) => {
+  .put('/editUser', async (req, res) => {
     try {
       let user = await User.editUser(req.body);
       res.send({...user, password: undefined});
@@ -39,7 +39,7 @@ router
     }
   })
 
-  .delete('/delete', async (req, res) => {
+  .delete('/deleteUser', async (req, res) => {
     try {
       User.deleteUser(req.body);
       res.send({success: "We'll Miss You... :("})
