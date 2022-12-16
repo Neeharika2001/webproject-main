@@ -1,3 +1,4 @@
+/*
 const users = [
   {
       firstname:"Neeharika",
@@ -12,7 +13,7 @@ const users = [
   },
 ];
 
-
+*/
 const con = require("./db_connect");
 
 
@@ -59,12 +60,12 @@ async function getUser(user) {
 
 
 async function login(user) { 
-  console.log(user.emailid);
+  //console.log(user.emailid);
 let cUser = await getUser(user); 
 
 if(!cUser[0]) throw Error(user.emailid+" email not found");
 if(cUser[0].pwd !== user.pwd) throw Error("Password incorrect");
-console.log(cUser[0]);
+//console.log(cUser[0]);
 
 return cUser[0];
 }
