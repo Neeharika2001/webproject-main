@@ -12,14 +12,10 @@ router
     }
   })
 
-  .get('/getNote', async (req, res) => {
+  .post('/getNote', async (req, res) => {
     try {
       let note = await Note.getNote(req.body);
-      if(note["0"]){
-        res.send({...note})
-      }else{
-        res.send({error:"Enter a valid noteID"});
-      }
+      res.send(note)
     } catch(err) {
       res.status(401).send({message: err.message});
     }
@@ -29,7 +25,7 @@ router
     try {
       let note = await Note.getNotesByUser(req.body);
       if(note["0"]){
-        res.send({...note})
+        res.send({note})
       }else{
         res.send({error:"User does not have any notes"});
       }
@@ -41,7 +37,7 @@ router
   .post('/create', async (req, res) => {
     try {
       let note = await Note.create(req.body);
-      res.send({...note})
+      res.send({note})
     } catch(err) {
       res.status(401).send({message: err.message});
     }
@@ -50,7 +46,7 @@ router
   .put('/editNote', async (req, res) => {
     try {
       let note = await Note.editNote(req.body);
-      res.send({...note});
+      res.send({note});
     } catch(err) {
       res.status(401).send({message: err.message})
     }

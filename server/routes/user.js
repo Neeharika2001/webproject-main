@@ -10,7 +10,7 @@ router
     } catch(err) {
       res.status(401).send({message: err.message});
     }
-  })
+  })   
 
   .post('/login', async (req, res) => {
     try {
