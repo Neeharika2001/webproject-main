@@ -10,7 +10,6 @@
    .catch((err)=> console.log(err))
  }
 */
-// Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
   const response = await fetch(`http://localhost:3000${route}`, {
     method: methodType, // *GET, POST, PUT, DELETE, etc.
@@ -30,3 +29,24 @@ export async function fetchData(route = '', data = {}, methodType) {
     throw await response.json();
   }
 } 
+
+// logout event listener
+let logout = document.getElementById("logout-btn");
+if(logout) logout.addEventListener('click', removeCurrentUser)
+
+// stateful mechanism for user
+// logging in a user
+export function setCurrentUser(user) {
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
+// getting current user function
+export function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('user'));
+}
+
+// logout function for current user
+export function removeCurrentUser() {
+  localStorage.removeItem('user');
+  window.location.href = "login.html";
+}

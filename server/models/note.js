@@ -4,9 +4,10 @@ const con = require("./db_connect");
 async function createTable() {
 let sql=`CREATE TABLE IF NOT EXISTS notes (
   noteID INT NOT NULL AUTO_INCREMENT,
-  emailid VARCHAR(255) NOT NULL,
-  notes VARCHAR(255) NOT NULL,
-  CONSTRAINT notePK PRIMARY KEY(noteID)
+  userID INT NOT NULL,
+  notes1 VARCHAR(255) NOT NULL,
+  CONSTRAINT notePK PRIMARY KEY(noteID),
+  CONSTRAINT note_fk FOREIGN KEY(userID) REFERENCES users(userID)
 ); `
 await con.query(sql);
 }
@@ -14,8 +15,8 @@ createTable();
 
 async function create(note) {
 
-const sql = `INSERT INTO notes (emailid, notes)
-  VALUES ("${note.emailid}","${note.notes}");
+const sql = `INSERT INTO notes (userID,notes)
+  VALUES ("${note.userID}","${note.notes}");
 `
 
 await con.query(sql);
@@ -36,14 +37,14 @@ async function getNote(note) {
   
     sql = `
       SELECT * FROM notes
-       WHERE noteID = ${note.noteID}
+       WHERE userID = "${note.userID}"
     `
   
   return await con.query(sql);  
 }
 async function deleteNote(note) {
     let sql = `DELETE FROM notes
-      WHERE noteID = ${note.noteID}
+      WHERE noteID = "${note.noteID}"
     `
     await con.query(sql);
     }
